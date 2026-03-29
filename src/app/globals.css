@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #f4f1ea;
+  --poster-image: url("/assets/poster/poster-portrait.png");
+  --poster-font: "PosterDisplay", "Impact", "Bebas Neue", sans-serif;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --drift-x: 0px;
+  --drift-y: 0px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--poster-font);
+  --font-mono: var(--font-geist-mono);
+}
+
+@font-face {
+  font-family: "PosterDisplay";
+  src: url("/assets/fonts/custom-display.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--poster-font);
+}
+
+.poster-root {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  background:
+    radial-gradient(circle at 18% 24%, rgb(34 43 86 / 32%), transparent 35%),
+    radial-gradient(circle at 82% 82%, rgb(146 49 48 / 28%), transparent 42%),
+    linear-gradient(165deg, #050505 15%, #090f1c 55%, #1a1014 100%);
+  overflow: hidden;
+}
+
+.poster-scene {
+  width: min(100%, 860px);
+  perspective: 1300px;
+  --poster-ratio: 0.75;
+}
+
+.poster-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--poster-ratio);
+  border-radius: 1.2rem;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+  transition: box-shadow 260ms ease;
+  box-shadow:
+    0 20px 50px rgb(0 0 0 / 60%),
+    0 0 0 1px rgb(255 255 255 / 6%);
+  overflow: hidden;
+}
+
+.poster-card:hover {
+  box-shadow:
+    0 32px 80px rgb(0 0 0 / 72%),
+    0 0 0 1px rgb(255 255 255 / 9%);
+}
+
+.poster-background,
+.poster-vignette,
+.poster-grain {
+  position: absolute;
+  inset: 0;
+}
+
+.poster-background {
+  background:
+    linear-gradient(135deg, rgb(0 0 0 / 38%), rgb(0 0 0 / 18%)),
+    var(--poster-image) center / cover no-repeat;
+  transform: translate3d(calc(var(--drift-x) * -0.3), calc(var(--drift-y) * -0.3), -140px) scale(1.08);
+  transform-style: preserve-3d;
+}
+
+.poster-vignette {
+  background:
+    radial-gradient(circle at 50% 18%, transparent 0 38%, rgb(0 0 0 / 58%) 84%),
+    linear-gradient(185deg, rgb(0 0 0 / 14%), rgb(0 0 0 / 58%));
+  transform: translateZ(40px);
+}
+
+.poster-grain {
+  background-image: radial-gradient(rgb(255 255 255 / 8%) 0.7px, transparent 0.7px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+  opacity: 0.26;
+  transform: translateZ(24px);
+}
+
+.text-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(0.15rem, 1vw, 0.55rem);
+  transform-style: preserve-3d;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f6ee;
+}
+
+.text-layer {
+  margin: 0;
+  line-height: 0.88;
+  transform-style: preserve-3d;
+  transform: translate3d(calc(var(--drift-x) * 0.45), calc(var(--drift-y) * 0.45), var(--layer-depth));
+  text-shadow:
+    0 0 20px rgb(0 0 0 / 30%),
+    0 8px 24px rgb(0 0 0 / 50%);
+}
+
+.headline {
+  font-size: clamp(3rem, 12vw, 8.7rem);
+  font-weight: 800;
+}
+
+.headline.top {
+  color: #f2dac3;
+}
+
+.headline.middle {
+  color: #e9f5f4;
+}
+
+.headline.bottom {
+  color: #f6d5dd;
+}
+
+.subline {
+  margin-top: clamp(0.4rem, 1.2vw, 1rem);
+  font-size: clamp(0.65rem, 1.2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  color: rgb(245 245 245 / 88%);
+}
+
+.setup-note {
+  position: absolute;
+  left: clamp(0.8rem, 2vw, 1.6rem);
+  bottom: clamp(0.8rem, 2vw, 1.6rem);
+  z-index: 4;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.45rem;
+  background: rgb(0 0 0 / 52%);
+  backdrop-filter: blur(6px);
+  transform: translate3d(calc(var(--drift-x) * 0.28), calc(var(--drift-y) * 0.28), 460px);
+}
+
+.setup-note p {
+  margin: 0;
+  font-size: clamp(0.54rem, 1.05vw, 0.72rem);
+  font-family: "Consolas", "Courier New", monospace;
+  letter-spacing: 0.02em;
+}
+
+.setup-note p:first-child {
+  margin-bottom: 0.22rem;
+  font-family: var(--poster-font);
+  font-size: clamp(0.56rem, 1.15vw, 0.82rem);
+  letter-spacing: 0.08em;
+}
+
+.social-links {
+  position: absolute;
+  bottom: clamp(0.8rem, 2vw, 1.6rem);
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  gap: clamp(0.35rem, 1vw, 0.7rem);
+  transform: translate3d(calc(-50% + (var(--drift-x) * 0.2)), calc(var(--drift-y) * 0.2), 460px);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 999px;
+  background: rgb(4 6 13 / 58%);
+  color: #f6f7f3;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.social-link span {
+  font-size: clamp(0.54rem, 1vw, 0.72rem);
+  letter-spacing: 0.06em;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-2px);
+  background: rgb(34 46 88 / 64%);
+  border-color: rgb(255 255 255 / 52%);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 84%);
+  outline-offset: 1px;
+}
+
+@media (max-width: 720px) {
+  .poster-root {
+    padding: 0.4rem;
+  }
+
+  .poster-card {
+    border-radius: 0.8rem;
+  }
+
+  .setup-note {
+    left: 0.5rem;
+    bottom: 0.5rem;
+    max-width: 86%;
+  }
+
+  .social-links {
+    width: calc(100% - 1rem);
+    bottom: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    padding: 0.34rem 0.56rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster-card,
+  .text-layer,
+  .setup-note,
+  .poster-background {
+    transform: none;
+  }
+}
