@@ -2,6 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import localFont from "next/font/local";
+
+const samanFont = localFont({
+  src: "../../../public/assets/fonts/Ananda_Neptouch.ttf",
+  display: "swap",
+});
 
 interface LoaderProps {
   onComplete: () => void;
@@ -135,7 +141,7 @@ export default function Loader({ onComplete }: LoaderProps) {
       </motion.div>
 
       {/* Title letter reveal */}
-      <motion.div className="loader-title-wrap" aria-label={title}>
+      <motion.div className={`loader-title-wrap ${samanFont.className}`} aria-label={title}>
         {title.split("").map((char, i) => (
           <motion.span
             key={i}

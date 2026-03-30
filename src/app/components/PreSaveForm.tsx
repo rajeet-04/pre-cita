@@ -100,7 +100,7 @@ export default function PreSaveForm() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.75, duration: 0.6 }}
       >
-        Stay ahead. Be the first to know when Citadel 1.0 goes live.
+        Stay ahead. Be the first to know when <span className="font-bold text-gold-light">Citadel 1.0</span> goes live.
       </motion.p>
 
       <form ref={formRef} onSubmit={handleSubmit} className="presave-form" noValidate>
