@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import { useEffect, useRef } from "react";
 import type { IconType } from "react-icons";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaFacebookF } from "react-icons/fa";
 
 type Layer = {
   text: string;
@@ -12,26 +12,26 @@ type Layer = {
 };
 
 const textLayers: Layer[] = [
-  { text: "NEON", className: "headline top", depth: 220 },
-  { text: "CITY", className: "headline middle", depth: 360 },
-  { text: "NIGHTS", className: "headline bottom", depth: 500 },
-  { text: "PARALLAX POSTER BOILERPLATE", className: "subline", depth: 180 },
+    // { text: "NEON", className: "headline top", depth: 220 },
+    // { text: "CITY", className: "headline middle", depth: 360 },
+    // { text: "NIGHTS", className: "headline bottom", depth: 500 },
+    // { text: "PARALLAX POSTER BOILERPLATE", className: "subline", depth: 180 },
 ];
 
 const socialLinks = [
   {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com",
-    icon: FaLinkedinIn,
-  },
-  {
     name: "Instagram",
-    href: "https://www.instagram.com",
+    href: "https://www.instagram.com/citadel_hackathon1.0?igsh=MTVsMTZiZWFuYW9kNA==",
     icon: FaInstagram,
   },
   {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/citadel-hackathon/",
+    icon: FaLinkedinIn,
+  },
+  {
     name: "Facebook",
-    href: "https://www.facebook.com",
+    href: "#",
     icon: FaFacebookF,
   },
 ] satisfies Array<{ name: string; href: string; icon: IconType }>;
@@ -100,52 +100,47 @@ export default function Home() {
 
   return (
     <main className="poster-root">
-      <div className="poster-scene" ref={sceneRef}>
-        <section className="poster-card" aria-label="Parallax poster preview">
-          <div className="poster-background" />
-          <div className="poster-vignette" />
-          <div className="poster-grain" />
+      <div className="poster-wrapper">
+        <div className="poster-scene" ref={sceneRef}>
+          <section className="poster-card" aria-label="Parallax poster preview">
+            <div className="poster-background" />
+            <div className="poster-vignette" />
+            <div className="poster-grain" />
 
-          <div className="text-stack" aria-hidden="true">
-            {textLayers.map((layer) => (
-              <p
-                key={layer.text}
-                className={`text-layer ${layer.className}`}
-                style={{
-                  "--layer-depth": `${layer.depth}px`,
-                } as CSSProperties}
-              >
-                {layer.text}
-              </p>
-            ))}
-          </div>
-
-          <aside className="setup-note">
-            <p>Drop your assets here:</p>
-            <p>/public/assets/poster/poster-portrait.png</p>
-            <p>/public/assets/fonts/custom-display.otf</p>
-          </aside>
-
-          <nav className="social-links" aria-label="Follow links">
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
-
-              return (
-                <a
-                  key={social.name}
-                  className="social-link"
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Follow on ${social.name}`}
+            <div className="text-stack" aria-hidden="true">
+              {textLayers.map((layer) => (
+                <p
+                  key={layer.text}
+                  className={`text-layer ${layer.className}`}
+                  style={{
+                    "--layer-depth": `${layer.depth}px`,
+                  } as CSSProperties}
                 >
-                  <Icon aria-hidden="true" size={16} />
-                  <span>{social.name}</span>
-                </a>
-              );
-            })}
-          </nav>
-        </section>
+                  {layer.text}
+                </p>
+              ))}
+            </div>
+
+            <nav className="poster-social-links" aria-label="Social links">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={social.name}
+                    className="poster-social-link"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                  >
+                    <Icon aria-hidden="true" size={16} />
+                  </a>
+                );
+              })}
+            </nav>
+          </section>
+        </div>
       </div>
     </main>
   );

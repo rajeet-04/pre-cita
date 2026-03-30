@@ -3,7 +3,7 @@
 :root {
   --background: #050505;
   --foreground: #f4f1ea;
-  --poster-image: url("/assets/poster/poster-portrait.png");
+  --poster-image: url("/assets/poster/poster3.png");
   --poster-font: "PosterDisplay", "Impact", "Bebas Neue", sans-serif;
   --rotate-x: 0deg;
   --rotate-y: 0deg;
@@ -46,17 +46,21 @@ body {
   overflow: hidden;
 }
 
+.poster-wrapper {
+  width: min(100%, 800px);
+  margin: 0 auto;
+}
+
 .poster-scene {
-  width: min(100%, 860px);
   perspective: 1300px;
-  --poster-ratio: 0.75;
 }
 
 .poster-card {
   position: relative;
   width: 100%;
-  aspect-ratio: var(--poster-ratio);
-  border-radius: 1.2rem;
+  aspect-ratio: 1414 / 2000;
+  border: 2px solid rgb(255 255 255 / 20%);
+  border-radius: 0;
   transform-style: preserve-3d;
   transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
   transition: box-shadow 260ms ease;
@@ -64,6 +68,13 @@ body {
     0 20px 50px rgb(0 0 0 / 60%),
     0 0 0 1px rgb(255 255 255 / 6%);
   overflow: hidden;
+}
+
+.poster-background {
+  background:
+    var(--poster-image) center / cover no-repeat;
+  transform: translate3d(calc(var(--drift-x) * -0.3), calc(var(--drift-y) * -0.3), -140px);
+  transform-style: preserve-3d;
 }
 
 .poster-card:hover {
@@ -81,16 +92,14 @@ body {
 
 .poster-background {
   background:
-    linear-gradient(135deg, rgb(0 0 0 / 38%), rgb(0 0 0 / 18%)),
-    var(--poster-image) center / cover no-repeat;
-  transform: translate3d(calc(var(--drift-x) * -0.3), calc(var(--drift-y) * -0.3), -140px) scale(1.08);
+    var(--poster-image) center / contain no-repeat;
+  transform: translate3d(calc(var(--drift-x) * -0.3), calc(var(--drift-y) * -0.3), -140px);
   transform-style: preserve-3d;
 }
 
 .poster-vignette {
   background:
-    radial-gradient(circle at 50% 18%, transparent 0 38%, rgb(0 0 0 / 58%) 84%),
-    linear-gradient(185deg, rgb(0 0 0 / 14%), rgb(0 0 0 / 58%));
+    radial-gradient(circle at 50% 100%, transparent 0 60%, rgb(0 0 0 / 28%) 100%);
   transform: translateZ(40px);
 }
 
@@ -176,54 +185,172 @@ body {
   letter-spacing: 0.08em;
 }
 
-.social-links {
+.poster-social-links {
   position: absolute;
-  bottom: clamp(0.8rem, 2vw, 1.6rem);
+  bottom: 1rem;
   left: 50%;
-  z-index: 4;
+  transform: translateX(-50%) translateZ(300px);
   display: flex;
-  gap: clamp(0.35rem, 1vw, 0.7rem);
-  transform: translate3d(calc(-50% + (var(--drift-x) * 0.2)), calc(var(--drift-y) * 0.2), 460px);
+  gap: 0.75rem;
+  z-index: 10;
 }
 
-.social-link {
+.poster-social-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.36rem;
-  padding: 0.42rem 0.65rem;
-  border: 1px solid rgb(255 255 255 / 28%);
-  border-radius: 999px;
-  background: rgb(4 6 13 / 58%);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 50%;
+  background: rgb(4 6 13 / 68%);
   color: #f6f7f3;
   text-decoration: none;
   backdrop-filter: blur(6px);
   transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
 
-.social-link span {
-  font-size: clamp(0.54rem, 1vw, 0.72rem);
-  letter-spacing: 0.06em;
-}
-
-.social-link:hover,
-.social-link:focus-visible {
+.poster-social-link:hover,
+.poster-social-link:focus-visible {
   transform: translateY(-2px);
   background: rgb(34 46 88 / 64%);
   border-color: rgb(255 255 255 / 52%);
 }
 
-.social-link:focus-visible {
+.mobile-social-icons {
+  display: none;
+}
+
+.mobile-contact-form {
+  display: none;
+}
+
+.contact-form {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: rgb(10 12 28 / 48%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.8rem;
+  pointer-events: all;
+}
+
+.contact-form h3 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: 0.06em;
+  color: #f5f6ee;
+}
+
+.form-group {
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: rgb(245 245 245 / 82%);
+  letter-spacing: 0.04em;
+}
+
+.form-group input {
+  padding: 0.6rem 0.8rem;
+  background: rgb(0 0 0 / 38%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 0.4rem;
+  color: #f5f6ee;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgb(255 255 255 / 42%);
+  background: rgb(0 0 0 / 52%);
+}
+
+.form-group input::placeholder {
+  color: rgb(245 245 245 / 48%);
+}
+
+.form-group.optional label::after {
+  content: " (optional)";
+  font-size: 0.75rem;
+  color: rgb(245 245 245 / 54%);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  padding: 0.65rem 1.2rem;
+  background: rgb(34 46 88 / 68%);
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 999px;
+  color: #f6f7f3;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  letter-spacing: 0.04em;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
+  background: rgb(34 46 88 / 82%);
+  border-color: rgb(255 255 255 / 42%);
+}
+
+.form-buttons button:focus-visible {
   outline: 2px solid rgb(255 255 255 / 84%);
   outline-offset: 1px;
 }
 
+.form-message {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.4rem;
+  text-align: center;
+}
+
+.form-message.success {
+  background: rgb(34 139 34 / 28%);
+  color: rgb(144 238 144);
+  border: 1px solid rgb(144 238 144 / 28%);
+}
+
+.form-message.error {
+  background: rgb(139 34 34 / 28%);
+  color: rgb(255 127 127);
+  border: 1px solid rgb(255 127 127 / 28%);
+}
+
 @media (max-width: 720px) {
   .poster-root {
-    padding: 0.4rem;
+    padding: 0;
+    align-items: center;
+  }
+
+  .poster-wrapper {
+    width: 100%;
+    margin: auto;
   }
 
   .poster-card {
-    border-radius: 0.8rem;
+    border-radius: 0;
+    border: 2px solid rgb(255 255 255 / 20%);
+    box-shadow: none;
+  }
+
+  .poster-card:hover {
+    box-shadow: none;
   }
 
   .setup-note {
@@ -232,15 +359,107 @@ body {
     max-width: 86%;
   }
 
-  .social-links {
-    width: calc(100% - 1rem);
-    bottom: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
+  .poster-social-links {
+    bottom: 0.75rem;
+    gap: 0.6rem;
   }
 
-  .social-link {
-    padding: 0.34rem 0.56rem;
+  .poster-social-link {
+    width: 34px;
+    height: 34px;
+  }
+
+  .contact-form {
+    display: none;
+  }
+
+  .mobile-contact-form {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgb(10 12 28 / 48%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 12%);
+  }
+
+  .mobile-contact-form h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: #f5f6ee;
+    text-align: center;
+  }
+
+  .mobile-contact-form .form-group {
+    margin-bottom: 0.8rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-contact-form .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    color: rgb(245 245 245 / 82%);
+    letter-spacing: 0.04em;
+  }
+
+  .mobile-contact-form .form-group input {
+    padding: 0.75rem 0.8rem;
+    background: rgb(0 0 0 / 38%);
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: 0;
+    color: #f5f6ee;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .mobile-contact-form .form-group input:focus {
+    outline: none;
+    border-color: rgb(255 255 255 / 42%);
+    background: rgb(0 0 0 / 52%);
+  }
+
+  .mobile-contact-form .form-group input::placeholder {
+    color: rgb(245 245 245 / 48%);
+  }
+
+  .mobile-contact-form .form-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .mobile-contact-form .form-buttons button {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: 0;
+    background: rgb(34 46 88 / 64%);
+    color: #f5f6ee;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .mobile-contact-form .form-buttons button[type="submit"] {
+    background: rgb(88 126 224 / 82%);
+  }
+
+  .mobile-contact-form .form-message {
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #f5f6ee;
+    background: rgb(0 0 0 / 28%);
+  }
+
+  .mobile-contact-form .form-message.success {
+    background: rgb(34 88 34 / 48%);
+  }
+
+  .mobile-contact-form .form-message.error {
+    background: rgb(88 34 34 / 48%);
   }
 }
 
