@@ -74,14 +74,14 @@ export default function PreSaveForm() {
       className="presave-section"
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
     >
       {/* Glow accent bar */}
       <motion.div
         className="presave-accent-bar"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ delay: 0.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
         style={{ originX: 0.5 }}
       />
 
@@ -89,7 +89,7 @@ export default function PreSaveForm() {
         className="presave-heading"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         Get Early Access
       </motion.h2>

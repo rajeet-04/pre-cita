@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { IconType } from "react-icons";
 import { FaInstagram, FaLinkedinIn, FaFacebookF } from "react-icons/fa";
@@ -92,7 +91,7 @@ export default function Home() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] as const },
     },
   };
 
