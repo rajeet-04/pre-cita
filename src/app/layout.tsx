@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Citadel 1.0",
   description: "Reveal poster for Citadel 1.0",
+  icons: {
+    icon: "/CITADEL LOGO (1).png",
+  },
 };
 
 export default function RootLayout({
