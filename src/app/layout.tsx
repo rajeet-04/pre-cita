@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Citadel 1.0",
   description: "Reveal poster for Citadel 1.0",
   icons: {
-    icon: "/CITADEL LOGO (1).png",
+    icon: "/assets/logo.png",
   },
 };
 
@@ -28,9 +28,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body suppressHydrationWarning className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
